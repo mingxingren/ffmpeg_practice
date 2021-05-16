@@ -32,7 +32,7 @@ void CPlayerThread::run()
     {
         int64_t iNowTime = QDateTime::currentMSecsSinceEpoch();
         int64_t iOffsetTime = iNowTime - m_iStartTime;
-        if (m_pDecodeThd->GetAudioQueuePack().size() > 0)
+        if (m_pDecodeThd->GetAudioQueuePack().size() > 0)   // 处理音频帧队列
         {
             if (m_pDecodeThd->GetAudioQueuePack().head().dTimeStamp < iOffsetTime)
             {
@@ -60,7 +60,7 @@ void CPlayerThread::run()
             }
         }
 
-        if (m_pDecodeThd->GetVideoQueuePack().size() > 0){
+        if (m_pDecodeThd->GetVideoQueuePack().size() > 0){		// 处理视频帧队列
             if (m_pDecodeThd->GetVideoQueuePack().head().dTimeStamp < iOffsetTime)
             {
                 TPackInfo tPack = m_pDecodeThd->GetVideoQueuePack().dequeue();
